@@ -1,11 +1,19 @@
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
+const uri = process.env.URI;
 const connectDB = async () => {
   try {
+    const connect = await mongoose.connect(uri);
+    if (connect) {
+      console.log(`connected`);
+    } else {
+      console.log(`not connect`);
+    }
   } catch (error) {
     console.log(error);
     process.exit(1);
   }
 };
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/rhshuvo44/music-player-server.git
-git push -u origin main
+
+module.exports = connectDB;
